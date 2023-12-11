@@ -124,4 +124,9 @@ class CustomerController extends Controller
         $customer->delete();
         return redirect('/customers')->with('success', 'Customer deleted');
     }
+
+    public function search()
+    {
+        return view('customers.search');
+    }
 }

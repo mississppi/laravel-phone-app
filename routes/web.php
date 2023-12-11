@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,9 @@ Route::middleware('auth')->group(function () {
     // /customer/{customer}
     // /customer/{customer}/edit
     Route::resource('customers', CustomerController::class);
+
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
+    Route::post('/search', [SearchController::class, 'performSearch'])->name('performSearch');
 });
 
 require __DIR__.'/auth.php';
