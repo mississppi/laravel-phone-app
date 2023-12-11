@@ -14,7 +14,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('customers.index');
+        // dd("gure");
+        $customers = Customer::all();
+        return view('customers.index', compact('customers'));
     }
 
     /**
