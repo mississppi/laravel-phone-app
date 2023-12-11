@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use Throwable;
 
 class CustomerController extends Controller
 {
@@ -36,14 +37,24 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-
-        $customer = Customer::create([
-            'name' => $request->input('name'),
-            'phone' => $request->input('phone'),
-            'email' => $request->input('email'),
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
         ]);
 
-        return redirect('/dashboard')->with('success', 'Customer created');
+        try {
+            $customer = Customer::create([
+                'name' => $request->input('name'),
+                'phone' => $request->input('phone'),
+                'email' => $request->input('email'),
+            ]);
+            return redirect('/dashboard')->with('success', 'Customer created');
+        } catch(\Throwable $e) {
+            \Log::error($e);
+            throw $e;
+        }
+
     }
 
     /**
@@ -84,15 +95,21 @@ class CustomerController extends Controller
             'email' => 'required|email|max:255',
         ]);
 
-        $customer = Customer::find($id);
+        try{
+            $customer = Customer::find($id);
+    
+            $customer->update([
+                'name' => $request->input('name'),
+                'phone' => $request->input('phone'),
+                'email' => $request->input('email'),
+            ]);
+    
+            return redirect('/customers')->with('success', 'Customer created');
 
-        $customer->update([
-            'name' => $request->input('name'),
-            'phone' => $request->input('phone'),
-            'email' => $request->input('email'),
-        ]);
-
-        return redirect('/customers')->with('success', 'Customer created');
+        } catch(Throwable $e){
+            \Log::error($e);
+            throw $e;
+        }
     }
 
     /**
