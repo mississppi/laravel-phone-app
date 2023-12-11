@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InteractionController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
@@ -39,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/search', [SearchController::class, 'performSearch'])->name('performSearch');
 
     Route::get('/phone', [PhoneController::class, 'index'])->name('phone');
+
+    Route::resource('interactions', InteractionController::class);
 });
 
 require __DIR__.'/auth.php';
