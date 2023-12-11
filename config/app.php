@@ -212,4 +212,5 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'amazon_connect_instance_url' => env('VITE_AMAZON_CONNECT_INSTANCE_URL'),
 ];
