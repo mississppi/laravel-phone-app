@@ -20,7 +20,8 @@
                             <th scope="col" class="px-6 py-3">name</th>
                             <th scope="col" class="px-6 py-3">phone</th>
                             <th scope="col" class="px-6 py-3">email</th>
-                            <th scope="col" class="px-6 py-3">action</th>
+                            <th scope="col" class="px-6 py-3">edit</th>
+                            <th scope="col" class="px-6 py-3">delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,6 +34,14 @@
                                 <td class="px-6 py-4">{{$customer->email}}</td>
                                 <td class="px-6 py-4">
                                     <a href="{{ route('customers.edit', ['customer' => $customer->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <form action="{{ route('customers.destroy', ['customer' => $customer->id]) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        
+                                        <button type="submit" class="font-medium text-blue-600 dark:text-red-500 hover:underline">Delete</button>
+                                    </form>
                                 </td>
                                 </tr>
                             @endforeach
