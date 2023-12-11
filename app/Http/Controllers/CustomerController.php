@@ -14,7 +14,6 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        // dd("gure");
         $customers = Customer::all();
         return view('customers.index', compact('customers'));
     }
@@ -66,7 +65,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customer::find($id);
+        return view('customers.edit', ['customer' => $customer]);
     }
 
     /**
@@ -78,7 +78,21 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+        ]);
+
+        $customer = Customer::find($id);
+
+        $customer->update([
+            'name' => $request->input('name'),
+            'phone' => $request->input('phone'),
+            'email' => $request->input('email'),
+        ]);
+
+        return redirect('/customers')->with('success', 'Customer created');
     }
 
     /**
