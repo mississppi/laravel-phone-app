@@ -15,7 +15,7 @@ class InteractionController extends Controller
      */
     public function index()
     {
-        $interactions = Interaction::with('customer')->get();
+        $interactions = Interaction::with('customer')->orderBy('interaction_date', 'desc')->get();
         return view('interactions.index', compact('interactions'));
     }
 
