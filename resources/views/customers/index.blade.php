@@ -20,6 +20,7 @@
                             <th scope="col" class="px-6 py-3">name</th>
                             <th scope="col" class="px-6 py-3">phone</th>
                             <th scope="col" class="px-6 py-3">email</th>
+                            <th scope="col" class="px-6 py-3">detail</th>
                             <th scope="col" class="px-6 py-3">edit</th>
                             <th scope="col" class="px-6 py-3">delete</th>
                             </tr>
@@ -32,6 +33,9 @@
                                 </th>
                                 <td class="px-6 py-4">{{$customer->phone}}</td>
                                 <td class="px-6 py-4">{{$customer->email}}</td>
+                                <td class="px-6 py-4">
+                                    <a href="{{ route('customers.show', ['customer' => $customer->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
+                                </td>
                                 <td class="px-6 py-4">
                                     <a href="{{ route('customers.edit', ['customer' => $customer->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                 </td>

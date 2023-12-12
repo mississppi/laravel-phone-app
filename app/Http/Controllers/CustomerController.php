@@ -65,7 +65,8 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer_data = Customer::with('interactions')->find($id);
+        return view('customers.detail', compact('customer_data'));
     }
 
     /**
